@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:id="@+id/item_card"
+	android:clickable="true"
+	android:foreground="?attr/selectableItemBackground"
+	android:layout_marginStart="8dp"
+	android:layout_marginEnd="8dp"
+	android:layout_marginTop="4dp"
+	android:layout_marginBottom="4dp">
+
+	<ImageView
+		android:layout_height="40dp"
+		android:layout_width="40dp"
+		android:layout_gravity="start|center"
+		android:scaleType="centerInside"
+		android:src="@drawable/image_ship"
+		android:layout_margin="16dp"
+		android:id="@+id/itemhistoryImageView1"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_gravity="start|center"
+		android:layout_height="wrap_content"
+		android:paddingStart="72dp"
+		android:orientation="vertical">
+
+		<TextView
+			android:id="@+id/itemhistory_type"
+			android:layout_gravity="start|center"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Ship"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:textColor="#000000"/>
+
+		<TextView
+			android:layout_height="wrap_content"
+			android:layout_gravity="start|center"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:layout_width="wrap_content"
+			android:text="ID=123456"
+			android:id="@+id/itemhistory_id"/>
+
+	</LinearLayout>
+<!--
+	<ImageButton
+		style="?android:attr/buttonBarButtonStyle"
+		android:layout_height="50dp"
+		android:layout_width="50dp"
+		android:layout_marginEnd="8dp"
+		android:layout_gravity="end|center"
+		android:scaleType="fitCenter"
+		android:src="@drawable/ic_delete_grey600_48dp"
+		android:id="@+id/itemhistory_delete"/>-->
+
+</android.support.v7.widget.CardView>
+

@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<group 
+
+	>
+		<item
+			android:id="@+id/item_get"
+			android:icon="@drawable/get_saves"
+			android:title="@string/item_get"/>
+		<item
+			android:id="@+id/item_collection"
+			android:icon="@drawable/abc_ic_star_black_48dp"
+			android:title="@string/item_colle"/>
+		<item
+			android:id="@+id/item_cal_dv"
+			android:icon="@drawable/ic_invert_colors_black_48dp"
+			android:title="@string/item_DV"/>
+		<item
+			android:id="@+id/item_setting"
+			android:icon="@drawable/ic_settings_black_48dp"
+			android:title="@string/item_set"/>
+    </group>
+</menu>

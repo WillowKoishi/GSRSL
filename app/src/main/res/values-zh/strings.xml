@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SR存档下载器Lite</string>
+    <string name="hello_world">Hello world!</string>
+	<string name="about">关于</string>
+	<string name="setting">设置</string>
+	<string name="quit">退出</string>
+	<string name="whatnew">更新内容</string>
+	<string name="new_">版本v2.0\n·完全修改了应用风格\n·增加ΔV计算器\n·修复了同时增加了一些bug\n感谢Kally的技术滋瓷</string>
+	<string name="get">获取</string>
+	<string name="item_get">获取存档</string>
+	<string name="item_colle">收藏</string>
+	<string name="item_set">设置</string>
+	<string name="hint_getship">请输入载具ID</string>
+	<string name="hint_inputid">请输入存档ID</string>
+	<string name="hint_getsandbox">请输入沙盒ID</string>
+	<string name="hasnot">你还没有安装简单火箭:(</string>
+	<string name="item_getship">获取载具</string>
+	<string name="item_getsandbox">获取沙盒</string>
+	<string name="item_DV">∆V计算器</string>
+	<string name="ship">载具</string>
+	<string name="sandbox">沙盒</string>
+	<string name="isp">比冲量</string>
+	<string name="item_old">老版本界面</string>
+	<string name="m">全重</string>
+	<string name="m0">空重</string>
+	<string name="g">重力加速度</string>
+	<string name="format_error">格式错误</string>
+	<string name="reference">比冲参考值</string>
+	<string name="input_data">请输入数据</string>
+	<string name="refer_intro">这里罗列了一些发动机的比冲量，数据来源于几个航天类游戏,你可以直接点击列表来输入数据\n_(:з」∠)_</string>
+	<string name="simplerockets">简单火箭</string>
+	<string name="ksp">坎巴拉太空计划</string>
+	<string name="noId">你还没有输入任何内容!</string>
+	<string name="noLong">你输入的ID长度不够!</string>
+	<string name="back_again">再按一次返回键退出</string>
+	<string-array name="sr_engine">
+		<item>Tiny 21</item>
+		<item>Tiny 87</item>
+		<item>Blasto 175</item>
+		<item>Blasto 425</item>
+		<item>SRB Blasto 500</item>
+	</string-array>
+	<string-array name="ksp_engine">
+		<item>LV-1 “蚂蚁”液体燃料发动机</item>
+		<item>48-7S “火花”液体燃料发动机</item>
+		<item>LV-909 “猎犬”液体燃料发动机</item>
+		<item>LV-T30 “信赖”液体燃料发动机</item>
+		<item>LV-T45 “转轮”液体燃料发动机</item>
+		<item>S3 KS-25 “矢量”液体燃料发动机</item>
+		<item>LV-N “神经元”核子火箭发动机</item>
+		<item>RE-L10 “贵宾犬”液体燃料发动机</item>
+		<item>RE-I5 “船长”液体燃料发动机</item>
+		<item>RE-M3 “主帆”液体燃料发动机</item>
+		<item>KR-2L “犀牛”液体燃料发动机</item>
+		<item>S3 KS-25x4 “猛犸”液体燃料发动机</item>
+		<item>IX-6315 “黎明”电力推进系统</item>
+		<item>RT-5 “跳蚤”固体燃料发动机</item>
+		<item>RT-10 “铁锤”固体燃料发动机</item>
+		<item>BACC “强击”固体燃料发动机</item>
+		<item>SRB-KD25K “反冲”固体燃料发动机</item>
+		<item>J-20 “朱诺”基础喷气式引擎</item>
+		<item>J-33 “韦斯理”涡轮风扇引擎</item>
+		<item>J-404 “黑豹”后燃烧室涡扇引擎</item>
+		<item>J-X4 “鞭梢”涡轮冲压引擎</item>
+		<item>J-90 “哥利亚”涡轮风扇引擎</item>
+		<item>CR-7 空天引擎</item>
+	</string-array>
+
+</resources>
