@@ -35,6 +35,7 @@ import android.view.View.OnClickListener;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.content.Intent;
+import android.net.Uri;
 
 
 
@@ -86,8 +87,10 @@ public class AppCompatMain extends AppCompatActivity
 					//WiToast.showToast(AppCompatMain.this,"sandbox",3000);
 					if (!isEmpty(aedit.getText().toString()))
 					{
-						addHistory(aedit.getText().toString(), false);
-						saveHistory();
+						//addHistory(aedit.getText().toString(), false);
+						//saveHistory();
+						//startActivity(new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("simplerockets://03" + aedit.getText())));
+						startSR(false);
 					}
 				}
 			});
@@ -100,8 +103,10 @@ public class AppCompatMain extends AppCompatActivity
 				{
 					if (!isEmpty(aedit.getText().toString()))
 					{
-						addHistory(aedit.getText().toString(), true);
-						saveHistory();
+						//addHistory(aedit.getText().toString(), true);
+						//saveHistory();
+						//startActivity(new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("simplerockets://00" + aedit.getText())));
+						startSR(true);
 					}
 				}
 			});
@@ -112,13 +117,13 @@ public class AppCompatMain extends AppCompatActivity
 		ctl.setFocusableInTouchMode(true);
 		ctl.setFocusable(true);
 		ctl.setClickable(true);
-		history=new ArrayList<SavedItem>();
+		history = new ArrayList<SavedItem>();
 		toolbar.setPopupTheme(R.style.ThemeOverlay_AppCompat_Light);
 		setSupportActionBar(toolbar);
 		//id = new ArrayList<String>();
 		//type = new ArrayList<Boolean>();
 		initData();
-		getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
+		getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		//setSelectedItemId(NaView.getMenu().getItem(position).getItemId());
 		android.support.v7.app.ActionBarDrawerToggle drawerToggle = new android.support.v7.app.ActionBarDrawerToggle(AppCompatMain.this, drawer, toolbar, R.string.whatnew , R.string.about) {
@@ -143,6 +148,39 @@ public class AppCompatMain extends AppCompatActivity
 		//fragmentTransaction.add(R.id.main_fragment,acgs);
 		//fragmentTransaction.commit();
 	}
+	private void startSR(boolean type)
+	{
+		boolean a=false;
+		int position=0;
+		for (int i=0;i < history.size();i++)
+		{
+			String aa=history.get(i).getId();
+			String bb=aedit.getText().toString();
+			boolean cc=aa.indexOf(bb)>=0&&bb.indexOf(aa)>=0;
+			if (cc)
+			{	
+				position = i;
+				a =true;}
+		}
+		if (a)
+		{
+			SavedItem si=history.get(position);
+			si.changeType(type);
+			history.add(0, si);
+			history.remove(position + 1);
+			adapter.moveItem(position, history);	
+			saveHistory();
+			//WiToast.showToast(AppCompatMain.this, "cf" + history.get(position).getId(), 2000);
+				startActivity(new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("simplerockets://"+(type?"03":"01") + aedit.getText())));
+		}
+		else if (!a)
+		{
+			//WiToast.showToast(AppCompatMain.this, "j" + position + a + history.size(), 2000);
+			addHistory(aedit.getText().toString(), type);
+			saveHistory();
+				startActivity(new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("simplerockets://"+(type?"03":"01") + aedit.getText())));
+		}
+	}
 	private void setupDrawerContent(NavigationView navigationView)
     {
         navigationView.setNavigationItemSelectedListener(
@@ -157,7 +195,7 @@ public class AppCompatMain extends AppCompatActivity
 					switch (menuItem.getItemId())
 					{
 						case R.id.item_setting:
-							startActivity(new Intent(AppCompatMain.this,AppCompatSetting.class));
+							startActivity(new Intent(AppCompatMain.this, AppCompatSetting.class));
 							break;
 					}
 					drawer.closeDrawers();
@@ -205,7 +243,7 @@ public class AppCompatMain extends AppCompatActivity
 		adapter.setOnitemClickLintener(new RecyclerAdapter.onHistoryClick(){
 
 				@Override
-				public void onClick(String mid, Boolean mtype, String time, final int position)
+				public void onClick(final String mid, final Boolean mtype, String time, final int position)
 				{String info=!mtype ?"沙盒存档": "载具存档";
 					//	if (type)
 					//		{
@@ -225,12 +263,13 @@ public class AppCompatMain extends AppCompatActivity
 										//id.remove(position + 1);
 										//type.add(0, type.get(position));
 										//type.remove(position + 1);
-										history.add(0,history.get(position));
-										history.remove(position+1);
+										history.add(0, history.get(position));
+										history.remove(position + 1);
 										//saveHistory();
-										adapter.moveItem(position,history);	
+										adapter.moveItem(position, history);	
 										rv.scrollToPosition(0);
 										cpw.dismiss();
+										startActivity(new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("simplerockets://" + (mtype ?"03": "01") + mid)));
 										break;
 									case 1:
 										break;
@@ -316,7 +355,7 @@ public class AppCompatMain extends AppCompatActivity
 			{
 				String[] hisItem=histor[i].split("@di");
 				SavedItem si=new SavedItem();
-				si.initHistory(hisItem[0],Integer.valueOf(hisItem[1]) == 1 ?true:false,"2019",null);
+				si.initHistory(hisItem[0], Integer.valueOf(hisItem[1]) == 1 ?true: false, "2019", null);
 				history.add(si);
 				//id.add(hisItem[0]);
 				//type.add(Integer.valueOf(hisItem[1]) == 1 ?true: false);
@@ -326,7 +365,7 @@ public class AppCompatMain extends AppCompatActivity
 		{
 			//id = null;
 			//type = null;
-			history=null;
+			history = null;
 		}
 		//	for (int i=1;i < 40;i++)
 		//	{		id.add(Integer.toString(1000000 + i));
@@ -347,8 +386,8 @@ public class AppCompatMain extends AppCompatActivity
 		//id.add(0, mId);
 		//type.add(0, mType);
 		SavedItem si=new SavedItem();
-		si.initHistory(mId,mType,"2019",null);
-		history.add(0,si);
+		si.initHistory(mId, mType, "2019", null);
+		history.add(0, si);
 		adapter.addItem(history);
 		//rv.scrollToPosition(0);
 	}
@@ -358,7 +397,7 @@ public class AppCompatMain extends AppCompatActivity
 		for//(int i=id.size()-1;i>=0;i--)
 		(int i=0;i < history.size();i++)
 		{SavedItem si=new SavedItem();
-		si=history.get(i);
+			si = history.get(i);
 			mH = (isEmpty(mH) ?"": mH) + si.getId() + "@di" + (si.getType() ?1: 0) + "@di" + si.getTime() + (!(i == history.size()) ?"@hist0ry": "");
 		}
 		sp.edit().putString("history", mH).commit();

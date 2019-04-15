@@ -9,7 +9,6 @@ public class DeltaVCalculater extends Fragment
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		// TODO: Implement this method
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 	

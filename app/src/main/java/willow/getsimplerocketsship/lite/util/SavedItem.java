@@ -7,6 +7,11 @@ public class SavedItem
 	public String mTime;
 	public String mName;
 	public Long mTimes;
+
+	public void changeType(Boolean type)
+	{
+		mType=type;
+	}
 	public void initHistory(String id,boolean type,String time,Long times){
 		mId=id;
 		mType=type;
