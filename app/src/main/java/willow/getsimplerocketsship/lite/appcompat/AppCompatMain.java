@@ -36,6 +36,14 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.content.Intent;
 import android.net.Uri;
+import java.io.InputStream;
+import android.content.Context;
+import java.io.IOException;
+import android.widget.FrameLayout;
+import willow.getsimplerocketsship.lite.fragment.*;
+import android.view.View;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 
 
@@ -60,6 +68,18 @@ public class AppCompatMain extends AppCompatActivity
 	private  RecyclerAdapter adapter;
 	private CardPopupWindow cpw;
 	private SharedPreferences sp;
+	private FrameLayout frame;
+
+	private Collections colle;
+
+	public void hideMe()
+	{
+		fragmentTransaction=getSupportFragmentManager().beginTransaction();
+		fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+		fragmentTransaction.hide(colle);
+		fragmentTransaction.commit();
+		coordinatorLayout.setVisibility(View.VISIBLE);
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -69,6 +89,7 @@ public class AppCompatMain extends AppCompatActivity
 		drawer = (DrawerLayout)this.findViewById(R.id.drawer_layout);
 		NaView = (NavigationView)this.findViewById(R.id.id_nv_menu);
 		rv = (RecyclerView)this.findViewById(R.id.recyclerview);
+		frame=(FrameLayout)this.findViewById(R.id.main_fragment);
 		//fab=(FloatingActionButton)this.findViewById(R.id.fab_delete);
 		coordinatorLayout = (CoordinatorLayout)this.findViewById(R.id.appcompatmainCoordinatorLayout1);
 		ctl = (CollapsingToolbarLayout)this.findViewById(R.id.ctl1);
@@ -145,12 +166,16 @@ public class AppCompatMain extends AppCompatActivity
 		setupDrawerContent(NaView);
 		FragmentManager fm=getSupportFragmentManager();
 		fragmentTransaction = fm.beginTransaction();
-		//fragmentTransaction.add(R.id.main_fragment,acgs);
-		//fragmentTransaction.commit();
+		colle=new Collections();
+		fragmentTransaction.add(R.id.main_fragment, colle);
+		fragmentTransaction.hide(colle);
+		fragmentTransaction.commit();
 	}
 	private void startSR(boolean type)
 	{
 		boolean a=false;
+		Date date=new Date(System.currentTimeMillis());
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm");
 		int position=0;
 		for (int i=0;i < history.size();i++)
 		{
@@ -166,19 +191,20 @@ public class AppCompatMain extends AppCompatActivity
 		{
 			SavedItem si=history.get(position);
 			si.changeType(type);
+			si.changeTime(sdf.format(date));
 			history.add(0, si);
 			history.remove(position + 1);
 			adapter.moveItem(position, history);	
 			saveHistory();
 			//WiToast.showToast(AppCompatMain.this, "cf" + history.get(position).getId(), 2000);
-				startActivity(new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("simplerockets://"+(type?"03":"01") + aedit.getText())));
+				//startActivity(new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("simplerockets://"+(type?"03":"01") + aedit.getText())));
 		}
 		else if (!a)
 		{
 			//WiToast.showToast(AppCompatMain.this, "j" + position + a + history.size(), 2000);
-			addHistory(aedit.getText().toString(), type);
+			addHistory(aedit.getText().toString(), type,sdf.format(date));
 			saveHistory();
-				startActivity(new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("simplerockets://"+(type?"03":"01") + aedit.getText())));
+				//startActivity(new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("simplerockets://"+(type?"03":"01") + aedit.getText())));
 		}
 	}
 	private void setupDrawerContent(NavigationView navigationView)
@@ -190,14 +216,26 @@ public class AppCompatMain extends AppCompatActivity
 
 				@Override
 				public boolean onNavigationItemSelected(MenuItem menuItem)
-				{
+				{FragmentManager fm=getSupportFragmentManager();
+					fragmentTransaction = fm.beginTransaction();
+					fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
 					menuItem.setChecked(true);
+					
 					switch (menuItem.getItemId())
 					{
+						case R.id.item_get:
+							fragmentTransaction.hide(colle);
+							coordinatorLayout.setVisibility(View.VISIBLE);
+							break;
+						case R.id.item_collection:
+							fragmentTransaction.show(colle);
+							coordinatorLayout.setVisibility(View.GONE);
+							break;
 						case R.id.item_setting:
 							startActivity(new Intent(AppCompatMain.this, AppCompatSetting.class));
 							break;
 					}
+					fragmentTransaction.commit();
 					drawer.closeDrawers();
 					return true;
 				}
@@ -216,16 +254,30 @@ public class AppCompatMain extends AppCompatActivity
 			if ((currentTime - startTime) >= 2000)
 			{    
 				startTime = currentTime;  
-				//	Snackbar sb=new Snackbar();
-				Snackbar.make(coordinatorLayout, R.string.back_again, Snackbar.LENGTH_SHORT).show();
-				//WiToast.showToast(this,R.string.back_again,2000);
+					//Snackbar sb = null;//=new Snackbar();	
+				//Snackbar
+				//sb.make(frame,R.string.back_again, Snackbar.LENGTH_SHORT).show();
+				WiToast.showToast(this,R.string.back_again,2000);
 			}
 			else
 			{  
 				finish();  
 			} 
 		}
-	} 
+	}
+//	@Override
+//	public boolean onKeyDown(int keyCode, KeyEvent event)
+//	{
+//		if(keyCode==KeyEvent.KEYCODE_MENU){
+//			if(!drawer.isDrawerOpen(Gravity.LEFT)){
+//			drawer.openDrawer(Gravity.LEFT);
+//			}
+//			else{
+//				drawer.closeDrawer(Gravity.LEFT);
+//			}
+//		}
+//		return true;
+//	} 
 	public void initRecy()
 	{
 		manager = new LinearLayoutManager(this);
@@ -263,13 +315,15 @@ public class AppCompatMain extends AppCompatActivity
 										//id.remove(position + 1);
 										//type.add(0, type.get(position));
 										//type.remove(position + 1);
-										history.add(0, history.get(position));
+										SavedItem si=history.get(position);
+										si.changeTime(new SimpleDateFormat("yyyy/MM/dd HH:mm").format(new Date(System.currentTimeMillis())));
+										history.add(0, si);
 										history.remove(position + 1);
 										//saveHistory();
 										adapter.moveItem(position, history);	
 										rv.scrollToPosition(0);
 										cpw.dismiss();
-										startActivity(new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("simplerockets://" + (mtype ?"03": "01") + mid)));
+										//startActivity(new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("simplerockets://" + (mtype ?"03": "01") + mid)));
 										break;
 									case 1:
 										break;
@@ -316,6 +370,11 @@ public class AppCompatMain extends AppCompatActivity
 	{switch (item.getItemId())
 		{
 			case R.id.toolbar_about:
+				AlertDialog.Builder cd=new AlertDialog.Builder(AppCompatMain.this);
+				cd.setTitle("更新日志");
+				cd.setMessage(readAssetsTxt(this));
+				cd.setPositiveButton("知道了",null);
+				cd.show();
 				break;
 			case R.id.toolbar_clear_history:
 				AlertDialog.Builder ab=new AlertDialog.Builder(AppCompatMain.this);
@@ -355,7 +414,7 @@ public class AppCompatMain extends AppCompatActivity
 			{
 				String[] hisItem=histor[i].split("@di");
 				SavedItem si=new SavedItem();
-				si.initHistory(hisItem[0], Integer.valueOf(hisItem[1]) == 1 ?true: false, "2019", null);
+				si.initHistory(hisItem[0], Integer.valueOf(hisItem[1]) == 1 ?true: false, hisItem[2], null);
 				history.add(si);
 				//id.add(hisItem[0]);
 				//type.add(Integer.valueOf(hisItem[1]) == 1 ?true: false);
@@ -381,12 +440,12 @@ public class AppCompatMain extends AppCompatActivity
 		//	}
 		initRecy();
 	}
-	void addHistory(String mId, Boolean mType)
+	void addHistory(String mId, Boolean mType,String date)
 	{
 		//id.add(0, mId);
 		//type.add(0, mType);
 		SavedItem si=new SavedItem();
-		si.initHistory(mId, mType, "2019", null);
+		si.initHistory(mId, mType,date, null);
 		history.add(0, si);
 		adapter.addItem(history);
 		//rv.scrollToPosition(0);
@@ -426,6 +485,29 @@ public class AppCompatMain extends AppCompatActivity
 		saveHistory();
 		super.onDestroy();
 	}
-
+	public static String readAssetsTxt(Context context)
+	{
+        try
+		{
+            //Return an AssetManager instance for your application's package
+            InputStream is =context.getAssets().open("UpdataLoGLite");
+            int size = is.available();
+            // Read the entire asset into a local byte buffer.
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            // Convert the buffer into a string.
+            String text = new String(buffer, "utf-8");
+            // Finally stick the string into the text view.
+			return text;
+        }
+		catch (IOException e)
+		{
+            // Should never happen!
+//            throw new RuntimeException(e);
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
 //

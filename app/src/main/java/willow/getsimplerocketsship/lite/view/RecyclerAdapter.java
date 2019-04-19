@@ -45,7 +45,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.eiewHo
 //		mType=type;
 //		notifyItemInserted(0);
 //	}
-	public void addItem(ArrayList al){
+	public void addItem(ArrayList<SavedItem> al){
 		mHistory=al;
 		notifyItemInserted(0);
 	}
@@ -57,7 +57,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.eiewHo
 	//mID=id;
 	//mType=type;
 	mHistory=history;
-		notifyItemMoved(position,0);
+		//notifyItemMoved(position,0);
+		notifyDataSetChanged();
+		//notifyItemRangeChanged(0,history.size());
 	}
 	public void delItem(int p0)
 	{
@@ -98,6 +100,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.eiewHo
 	p1.type.setImageResource(si.getType()?R.drawable.ic_rocket:R.drawable.ic_lang);
 	p1.name.setText(si.getType()?R.string.ship:R.string.sandbox);
 	p1.id.setText("ID="+si.getId());
+	p1.time.setText(si.getTime());
 //		p1.id.setText("ID=" + si.getId());
 //		if (mType.get(p2))
 //		{
@@ -132,7 +135,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.eiewHo
 	{
 
         ImageView type;
-		TextView name,id;
+		TextView name,id,time;
 		CardView card;
 		//ImageButton delete;
 
@@ -143,6 +146,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.eiewHo
             type = (ImageView)itemView.findViewById(R.id.itemhistoryImageView1);
 			name = (TextView)itemView.findViewById(R.id.itemhistory_type);
 			id = (TextView)itemView.findViewById(R.id.itemhistory_id);
+			time= (TextView)itemView.findViewById(R.id.itemhistory_time);
 			//delete=(ImageButton)itemView.findViewById(R.id.itemhistory_delete);	
         }
     }

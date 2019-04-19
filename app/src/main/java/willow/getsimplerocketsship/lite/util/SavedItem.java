@@ -12,6 +12,9 @@ public class SavedItem
 	{
 		mType=type;
 	}
+	public void changeTime(String time){
+		mTime=time;
+	}
 	public void initHistory(String id,boolean type,String time,Long times){
 		mId=id;
 		mType=type;
