@@ -44,6 +44,8 @@ import willow.getsimplerocketsship.lite.fragment.*;
 import android.view.View;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import willow.getsimplerocketsship.lite.base.BaseAppCompatActivity;
+import android.widget.ImageButton;
 
 
 
@@ -69,14 +71,16 @@ public class AppCompatMain extends AppCompatActivity
 	private CardPopupWindow cpw;
 	private SharedPreferences sp;
 	private FrameLayout frame;
-
+	private ImageButton setTheme;
 	private Collections colle;
+	private DeltaVCalculater dvc;
 
 	public void hideMe()
 	{
 		fragmentTransaction=getSupportFragmentManager().beginTransaction();
 		fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
 		fragmentTransaction.hide(colle);
+		fragmentTransaction.hide(dvc);
 		fragmentTransaction.commit();
 		coordinatorLayout.setVisibility(View.VISIBLE);
 	}
@@ -84,6 +88,16 @@ public class AppCompatMain extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		SharedPreferences sp3=getSharedPreferences("Theme",MODE_PRIVATE);
+		//int i=sp.getInt("Theme",0);
+		switch(sp3.getInt("Theme",0)){
+			case 0:
+				setTheme(R.style.theme_sky);
+				break;
+			case 1:
+				setTheme(R.style.theme_grass);
+				break;
+		}
 		setContentView(R.layout.appcompat_main);
 		sp = getSharedPreferences("GSRSL_History", MODE_PRIVATE);
 		drawer = (DrawerLayout)this.findViewById(R.id.drawer_layout);
@@ -138,6 +152,15 @@ public class AppCompatMain extends AppCompatActivity
 		ctl.setFocusableInTouchMode(true);
 		ctl.setFocusable(true);
 		ctl.setClickable(true);
+		setTheme=(ImageButton)this.findViewById(R.id.setTheme);
+		setTheme.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(View p1)
+				{
+					startActivity(new Intent(AppCompatMain.this,ThemeSettings.class));
+				}
+			});
 		history = new ArrayList<SavedItem>();
 		toolbar.setPopupTheme(R.style.ThemeOverlay_AppCompat_Light);
 		setSupportActionBar(toolbar);
@@ -167,8 +190,11 @@ public class AppCompatMain extends AppCompatActivity
 		FragmentManager fm=getSupportFragmentManager();
 		fragmentTransaction = fm.beginTransaction();
 		colle=new Collections();
+		dvc=new DeltaVCalculater();
 		fragmentTransaction.add(R.id.main_fragment, colle);
+		fragmentTransaction.add(R.id.main_fragment, dvc);
 		fragmentTransaction.hide(colle);
+		fragmentTransaction.hide(dvc);
 		fragmentTransaction.commit();
 	}
 	private void startSR(boolean type)
@@ -224,11 +250,21 @@ public class AppCompatMain extends AppCompatActivity
 					switch (menuItem.getItemId())
 					{
 						case R.id.item_get:
+						//	hideMe();
 							fragmentTransaction.hide(colle);
+							fragmentTransaction.hide(dvc);
 							coordinatorLayout.setVisibility(View.VISIBLE);
 							break;
 						case R.id.item_collection:
+						//	hideMe();
+							fragmentTransaction.hide(dvc);
 							fragmentTransaction.show(colle);
+							coordinatorLayout.setVisibility(View.GONE);
+							break;
+						case R.id.item_cal_dv:
+							//hideMe();
+							fragmentTransaction.hide(colle);
+							fragmentTransaction.show(dvc);
 							coordinatorLayout.setVisibility(View.GONE);
 							break;
 						case R.id.item_setting:
@@ -466,23 +502,16 @@ public class AppCompatMain extends AppCompatActivity
 		return TextUtils.isEmpty(s);
 	}
 	@Override
-	protected void onPause()
-	{
-		saveHistory();
-		super.onPause();
-	}
-
-	@Override
 	protected void onStop()
 	{
 		saveHistory();
 		super.onStop();
 	}
-
 	@Override
 	protected void onDestroy()
 	{
 		saveHistory();
+		System.exit(0);
 		super.onDestroy();
 	}
 	public static String readAssetsTxt(Context context)

@@ -27,6 +27,7 @@ public class Collections extends Fragment
 					//getActivity().getSupportFragmentManager().beginTransaction().hide(Collections.this);
 				}
 			});
+			toolbar.setTitle(R.string.item_colle);
 		return view;
 	}
 }

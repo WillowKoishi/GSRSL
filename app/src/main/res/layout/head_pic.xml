@@ -33,5 +33,14 @@
 		android:src="@drawable/icon"
 		android:visibility="gone"/>
 
+	<ImageButton
+		style="?android:attr/buttonBarButtonStyle"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:src="@drawable/abc_ic_menu_copy_mtrl_am_alpha"
+		android:layout_alignParentRight="true"
+		android:id="@+id/setTheme"
+		android:layout_alignParentBottom="true"/>
+
 </RelativeLayout>
 

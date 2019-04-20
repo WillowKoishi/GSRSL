@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/dv_drawer_layout"
+	android:layout_width="match_parent"
+	android:fitsSystemWindows="true"
+	android:layout_height="match_parent">
+
+	<android.support.design.widget.CoordinatorLayout
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/fragmentdvCoordinatorLayout1">
+
+		<android.support.design.widget.AppBarLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+		</android.support.design.widget.AppBarLayout>
+
+		<android.support.v7.widget.Toolbar
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:background="?colorPrimary"
+			android:layout_height="wrap_content"
+			app:elevation="10dp"
+			android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+			android:minHeight="?attr/actionBarSize"
+			android:id="@+id/dv_toolbar"/>
+
+	</android.support.design.widget.CoordinatorLayout>
+
+	<android.support.design.widget.CoordinatorLayout
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_gravity="right"
+		android:id="@+id/fragmentdvCoordinatorLayout2">
+
+		<android.support.design.widget.AppBarLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+			<android.support.v7.widget.Toolbar
+				android:orientation="vertical"
+				android:layout_width="match_parent"
+				android:background="?colorPrimary"
+				android:layout_height="wrap_content"
+				app:elevation="10dp"
+				android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+				android:minHeight="?attr/actionBarSize"
+				android:id="@+id/dv_toolbar_refer"/>
+
+		</android.support.design.widget.AppBarLayout>
+
+	</android.support.design.widget.CoordinatorLayout>
+
+</android.support.v4.widget.DrawerLayout>
+
