@@ -65,5 +65,23 @@
 
 	</LinearLayout>
 
+	<RelativeLayout
+		android:layout_height="match_parent"
+		android:layout_width="match_parent">
+
+		<ImageView
+			android:layout_height="40dp"
+			android:layout_width="40dp"
+			android:scaleType="centerInside"
+			android:src="@drawable/ic_star_rate_black_48dp"
+			android:id="@+id/itemhistoryImageView2"
+			android:layout_marginRight="5dp"
+			android:layout_marginBottom="5dp"
+			android:layout_alignParentTop="true"
+			android:layout_marginTop="5dp"
+			android:layout_alignParentRight="true"/>
+
+	</RelativeLayout>
+
 </android.support.v7.widget.CardView>
 

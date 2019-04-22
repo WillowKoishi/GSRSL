@@ -16,20 +16,25 @@ import willow.getsimplerocketsship.lite.util.SavedItem;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.eiewHolder>
 {
 	private Context mContext;
-	//private ArrayList<String> mID;
-	//private View item;
-	//private List<Long> mHistory;
-	//private ArrayList<Boolean> mType;
 	private ArrayList<SavedItem> mHistory;
 	private RecyclerAdapter.onHistoryClick ohc;
-
-	//private RecyclerAdapter.eiewHolder viewHolder;
 	public RecyclerAdapter(Context context, ArrayList<SavedItem> history)
 	{
 		mContext = context;
 		mHistory=history;
-		//mID = id;
-		//mType = type;
+	}
+
+	public void reFreashColle(ArrayList<SavedItem> collec,int deColleID)
+	{
+		int posi = 0;
+		for(int i=0;i<mHistory.size();i++){
+			SavedItem si=mHistory.get(i);
+			if(Integer.valueOf( si.getId())== deColleID){
+				si.isCollected=false;
+				mHistory.set(i,si);
+			}
+		}
+		notifyItemChanged(posi);
 	}
 
 	public void clearAll()
@@ -101,17 +106,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.eiewHo
 	p1.name.setText(si.getType()?R.string.ship:R.string.sandbox);
 	p1.id.setText("ID="+si.getId());
 	p1.time.setText(si.getTime());
-//		p1.id.setText("ID=" + si.getId());
-//		if (mType.get(p2))
-//		{
-//			p1.type.setImageResource(R.drawable.ic_rocket);
-//			p1.name.setText(R.string.ship);
-//		}
-//		else
-//		{
-//			p1.type.setImageResource(R.drawable.ic_lang);
-//			p1.name.setText(R.string.sandbox);
-//		}
+	p1.colle.setVisibility(si.isCollected?View.VISIBLE:View.GONE);
 	final SavedItem si2=si;
 		p1.card.setOnClickListener(new OnClickListener(){
 				@Override
@@ -127,14 +122,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.eiewHo
 	public int getItemCount()
 	{
 		// TODO: Implement this method
-		//return mType == null ?0: mType.size();
-		return mHistory.size();//mID.size();
+		return mHistory == null ?0:mHistory.size();
+		//return mHistory.size(;//mID.size();
 	}
 
     class eiewHolder extends RecyclerView.ViewHolder
 	{
 
-        ImageView type;
+        ImageView type,colle;
 		TextView name,id,time;
 		CardView card;
 		//ImageButton delete;
@@ -147,6 +142,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.eiewHo
 			name = (TextView)itemView.findViewById(R.id.itemhistory_type);
 			id = (TextView)itemView.findViewById(R.id.itemhistory_id);
 			time= (TextView)itemView.findViewById(R.id.itemhistory_time);
+			colle=(ImageView)itemView.findViewById(R.id.itemhistoryImageView2);
 			//delete=(ImageButton)itemView.findViewById(R.id.itemhistory_delete);	
         }
     }

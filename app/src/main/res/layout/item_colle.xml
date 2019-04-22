@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:id="@+id/item_card"
+	android:clickable="true"
+	android:foreground="?attr/selectableItemBackground"
+	android:layout_marginStart="8dp"
+	android:layout_marginEnd="8dp"
+	android:layout_marginTop="4dp"
+	android:layout_marginBottom="4dp"
+	android:orientation="horizontal">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="fill_parent"
+		android:orientation="horizontal">
+
+		<RelativeLayout
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content">
+
+			<ImageView
+				android:layout_height="100dp"
+				android:layout_width="100dp"
+				android:src="@drawable/icon"
+				android:id="@+id/colle_icon"/>
+
+		</RelativeLayout>
+
+		<LinearLayout
+			android:layout_height="100dp"
+			android:layout_width="match_parent"
+			android:layout_marginStart="8dp"
+			android:layout_marginEnd="8dp"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_height="wrap_content"
+				android:layout_width="match_parent"
+				android:orientation="vertical">
+
+				<TextView
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceLarge"
+					android:layout_width="wrap_content"
+					android:text="Name"
+					android:id="@+id/colle_title"/>
+
+				<LinearLayout
+					android:layout_height="wrap_content"
+					android:layout_width="match_parent"
+					android:orientation="horizontal">
+
+					<TextView
+						android:layout_height="wrap_content"
+						android:textAppearance="?android:attr/textAppearanceSmall"
+						android:layout_width="match_parent"
+						android:text="id,type"
+						android:layout_weight="1.0"
+						android:id="@+id/colle_info"/>
+
+					<TextView
+						android:layout_height="wrap_content"
+						android:textAppearance="?android:attr/textAppearanceSmall"
+						android:layout_width="match_parent"
+						android:text="time"
+						android:layout_weight="1.0"
+						android:gravity="right"
+						android:id="@+id/colle_time"/>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+			<RelativeLayout
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content">
+
+				<LinearLayout
+					android:layout_height="wrap_content"
+					android:layout_width="match_parent"
+					android:orientation="horizontal"
+					android:layout_alignParentBottom="true"
+					android:id="@+id/itemcolleLinearLayout1">
+
+					<ImageButton
+						style="?android:attr/buttonBarButtonStyle"
+						android:layout_height="44dp"
+						android:layout_width="match_parent"
+						android:src="@drawable/start_gray"
+						android:layout_weight="1.0"
+						android:scaleType="centerInside"
+						android:id="@+id/colle_start_game"/>
+
+					<ImageButton
+						style="?android:attr/buttonBarButtonStyle"
+						android:layout_height="44dp"
+						android:layout_width="match_parent"
+						android:src="@drawable/ic_edit_grey"
+						android:layout_weight="1.0"
+						android:scaleType="centerInside"
+						android:id="@+id/colle_edit"/>
+
+					<ImageButton
+						style="?android:attr/buttonBarButtonStyle"
+						android:layout_height="44dp"
+						android:layout_width="match_parent"
+						android:src="@drawable/share_grey"
+						android:layout_weight="1.0"
+						android:scaleType="centerInside"
+						android:id="@+id/colle_share"/>
+
+					<ImageButton
+						style="?android:attr/buttonBarButtonStyle"
+						android:layout_height="44dp"
+						android:layout_width="match_parent"
+						android:src="@drawable/ic_delete_grey600_48dp"
+						android:layout_weight="1.0"
+						android:scaleType="centerInside"
+						android:id="@+id/colle_dele"/>
+
+				</LinearLayout>
+
+				<View
+					android:background="?android:attr/dividerVertical"
+					android:layout_height="0.5dp"
+					android:layout_width="match_parent"
+					android:layout_above="@id/itemcolleLinearLayout1"/>
+
+			</RelativeLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</android.support.v7.widget.CardView>
+

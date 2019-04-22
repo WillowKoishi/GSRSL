@@ -41,15 +41,19 @@ import android.content.Context;
 import java.io.IOException;
 import android.widget.FrameLayout;
 import willow.getsimplerocketsship.lite.fragment.*;
+import willow.getsimplerocketsship.lite.view.RecyclerAdapter.onHistoryClick;
 import android.view.View;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import willow.getsimplerocketsship.lite.base.BaseAppCompatActivity;
 import android.widget.ImageButton;
+import willow.getsimplerocketsship.lite.util.SavedItemTools;
+import android.os.*;
+import javax.crypto.*;
 
 
 
-public class AppCompatMain extends AppCompatActivity
+public class AppCompatMain extends BaseAppCompatActivity
 {
 	private DrawerLayout drawer;
 	private NavigationView NaView;
@@ -65,7 +69,7 @@ public class AppCompatMain extends AppCompatActivity
 	private CollapsingToolbarLayout ctl;
 	//private ArrayList<String> id;
 	//private ArrayList<Boolean> type;
-	private ArrayList<SavedItem> history;
+	public ArrayList<SavedItem> history,collections;
 	private RecyclerView.LayoutManager manager;
 	private  RecyclerAdapter adapter;
 	private CardPopupWindow cpw;
@@ -74,6 +78,11 @@ public class AppCompatMain extends AppCompatActivity
 	private ImageButton setTheme;
 	private Collections colle;
 	private DeltaVCalculater dvc;
+
+	public void reFreashRecy(ArrayList<SavedItem> collec,int id)
+	{
+		adapter.reFreashColle(collec,id);
+	}
 
 	public void hideMe()
 	{
@@ -88,16 +97,7 @@ public class AppCompatMain extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		SharedPreferences sp3=getSharedPreferences("Theme",MODE_PRIVATE);
-		//int i=sp.getInt("Theme",0);
-		switch(sp3.getInt("Theme",0)){
-			case 0:
-				setTheme(R.style.theme_sky);
-				break;
-			case 1:
-				setTheme(R.style.theme_grass);
-				break;
-		}
+		
 		setContentView(R.layout.appcompat_main);
 		sp = getSharedPreferences("GSRSL_History", MODE_PRIVATE);
 		drawer = (DrawerLayout)this.findViewById(R.id.drawer_layout);
@@ -166,7 +166,11 @@ public class AppCompatMain extends AppCompatActivity
 		setSupportActionBar(toolbar);
 		//id = new ArrayList<String>();
 		//type = new ArrayList<Boolean>();
-		initData();
+		//load load=new load();
+		//load.execute();
+		history=SavedItemTools.initHistoryData(AppCompatMain.this);
+		collections=SavedItemTools.initColleData(AppCompatMain.this);
+		initRecy();
 		getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		//setSelectedItemId(NaView.getMenu().getItem(position).getItemId());
@@ -223,14 +227,14 @@ public class AppCompatMain extends AppCompatActivity
 			adapter.moveItem(position, history);	
 			saveHistory();
 			//WiToast.showToast(AppCompatMain.this, "cf" + history.get(position).getId(), 2000);
-				//startActivity(new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("simplerockets://"+(type?"03":"01") + aedit.getText())));
+				//startActivity(new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("simplerockets://"+(type?"00":"03") + aedit.getText(),3000);)));
 		}
 		else if (!a)
 		{
 			//WiToast.showToast(AppCompatMain.this, "j" + position + a + history.size(), 2000);
 			addHistory(aedit.getText().toString(), type,sdf.format(date));
 			saveHistory();
-				//startActivity(new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("simplerockets://"+(type?"03":"01") + aedit.getText())));
+				//startActivity(new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("simplerockets://"+(type?"00":"03") + aedit.getText())));
 		}
 	}
 	private void setupDrawerContent(NavigationView navigationView)
@@ -328,7 +332,7 @@ public class AppCompatMain extends AppCompatActivity
 		//nra.upData(id,type);
 		//nra.notifyDataSetChanged();
 		adapter.setHasStableIds(true);
-		adapter.setOnitemClickLintener(new RecyclerAdapter.onHistoryClick(){
+		adapter.setOnitemClickLintener(new onHistoryClick(){
 
 				@Override
 				public void onClick(final String mid, final Boolean mtype, String time, final int position)
@@ -359,9 +363,20 @@ public class AppCompatMain extends AppCompatActivity
 										adapter.moveItem(position, history);	
 										rv.scrollToPosition(0);
 										cpw.dismiss();
-										//startActivity(new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("simplerockets://" + (mtype ?"03": "01") + mid)));
+										//startActivity(new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("simplerockets://" + (mtype ?"00": "03") + mid)));
+										WiToast.showToast(AppCompatMain.this,mtype?"00":"03",2000);
 										break;
 									case 1:
+										if(!history.get(position).isCollected){
+										SavedItem ci=new SavedItem();
+										ci.initCollection(mid,"cyka blyat",mtype,new SimpleDateFormat("yyyy/MM/dd HH:mm").format(new Date(System.currentTimeMillis())),null);
+										collections.add(ci);
+										SavedItemTools.saveCollections(collections,AppCompatMain.this);
+										SavedItem si2=history.get(position);
+										si2.isCollected=true;
+										history.set(position,si2);
+										adapter.moveItem(position,history);
+										}
 										break;
 									case 2:
 										break;
@@ -406,11 +421,7 @@ public class AppCompatMain extends AppCompatActivity
 	{switch (item.getItemId())
 		{
 			case R.id.toolbar_about:
-				AlertDialog.Builder cd=new AlertDialog.Builder(AppCompatMain.this);
-				cd.setTitle("更新日志");
-				cd.setMessage(readAssetsTxt(this));
-				cd.setPositiveButton("知道了",null);
-				cd.show();
+				
 				break;
 			case R.id.toolbar_clear_history:
 				AlertDialog.Builder ab=new AlertDialog.Builder(AppCompatMain.this);
@@ -436,67 +447,6 @@ public class AppCompatMain extends AppCompatActivity
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-	public void initData()
-	{
-		String[] histor=new String[]{};
-		if (!isEmpty(sp.getString("history", null)))
-		{
-			histor = sp.getString("history", null).split("@hist0ry");//@hist0ry ID @di type @di time
-		}
-		if (histor != null)
-		{
-			for (int i=0;i < histor.length;i++)
-			{
-				String[] hisItem=histor[i].split("@di");
-				SavedItem si=new SavedItem();
-				si.initHistory(hisItem[0], Integer.valueOf(hisItem[1]) == 1 ?true: false, hisItem[2], null);
-				history.add(si);
-				//id.add(hisItem[0]);
-				//type.add(Integer.valueOf(hisItem[1]) == 1 ?true: false);
-			}
-		}
-		else
-		{
-			//id = null;
-			//type = null;
-			history = null;
-		}
-		//	for (int i=1;i < 40;i++)
-		//	{		id.add(Integer.toString(1000000 + i));
-		//		double b=(Math.random());
-		//		if (b > 0.5)
-		//		{
-		//			type.add(true);
-		//		}
-		//		else
-		//	{
-		//			type.add(false);
-		//		}	
-		//	}
-		initRecy();
-	}
-	void addHistory(String mId, Boolean mType,String date)
-	{
-		//id.add(0, mId);
-		//type.add(0, mType);
-		SavedItem si=new SavedItem();
-		si.initHistory(mId, mType,date, null);
-		history.add(0, si);
-		adapter.addItem(history);
-		//rv.scrollToPosition(0);
-	}
-	void saveHistory()
-	{
-		String mH = null;
-		for//(int i=id.size()-1;i>=0;i--)
-		(int i=0;i < history.size();i++)
-		{SavedItem si=new SavedItem();
-			si = history.get(i);
-			mH = (isEmpty(mH) ?"": mH) + si.getId() + "@di" + (si.getType() ?1: 0) + "@di" + si.getTime() + (!(i == history.size()) ?"@hist0ry": "");
-		}
-		sp.edit().putString("history", mH).commit();
-	}
 	boolean isEmpty(String s)
 	{
 		return TextUtils.isEmpty(s);
@@ -511,32 +461,29 @@ public class AppCompatMain extends AppCompatActivity
 	protected void onDestroy()
 	{
 		saveHistory();
+		
 		System.exit(0);
 		super.onDestroy();
 	}
-	public static String readAssetsTxt(Context context)
+	void addHistory(String mId, Boolean mType,String date)
 	{
-        try
-		{
-            //Return an AssetManager instance for your application's package
-            InputStream is =context.getAssets().open("UpdataLoGLite");
-            int size = is.available();
-            // Read the entire asset into a local byte buffer.
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            // Convert the buffer into a string.
-            String text = new String(buffer, "utf-8");
-            // Finally stick the string into the text view.
-			return text;
-        }
-		catch (IOException e)
-		{
-            // Should never happen!
-//            throw new RuntimeException(e);
-            e.printStackTrace();
-        }
-        return null;
-    }
+		//id.add(0, mId);
+		//type.add(0, mType);
+		Boolean isColle=false;
+		ArrayList<SavedItem> colle=SavedItemTools.initHistoryData(this);
+		for(int i=0;i<colle.size();i++){
+			if(colle.get(i).getId().equals(mId)){
+				isColle=true;
+			}
+		}
+		SavedItem si=new SavedItem();
+		si.initHistory(mId, mType,date, null,isColle);
+		history.add(0, si);
+		adapter.addItem(history);
+		//rv.scrollToPosition(0);
+	}
+	void saveHistory(){
+		SavedItemTools.saveHistory(history,this);
+	}
 }
 //
