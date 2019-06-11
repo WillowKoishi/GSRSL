@@ -37,25 +37,51 @@
 			android:textAppearance="?android:attr/textAppearanceMedium"
 			android:textColor="#000000"/>
 
-		<TextView
+		<LinearLayout
 			android:layout_height="wrap_content"
-			android:layout_gravity="start|center"
-			android:textAppearance="?android:attr/textAppearanceSmall"
-			android:layout_width="wrap_content"
-			android:text="ID=123456"
-			android:id="@+id/itemhistory_id"/>
+			android:layout_marginEnd="8dp"
+			android:layout_width="match_parent"
+			android:orientation="horizontal">
+
+			<TextView
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:layout_width="match_parent"
+				android:text="ID=114514"
+				android:id="@+id/itemhistory_id"
+				android:layout_weight="1.0"
+				android:gravity="left"/>
+
+			<TextView
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:layout_width="match_parent"
+				android:text="1919/8/10 11:14"
+				android:id="@+id/itemhistory_time"
+				android:layout_weight="1.0"
+				android:gravity="right"/>
+
+		</LinearLayout>
 
 	</LinearLayout>
-<!--
-	<ImageButton
-		style="?android:attr/buttonBarButtonStyle"
-		android:layout_height="50dp"
-		android:layout_width="50dp"
-		android:layout_marginEnd="8dp"
-		android:layout_gravity="end|center"
-		android:scaleType="fitCenter"
-		android:src="@drawable/ic_delete_grey600_48dp"
-		android:id="@+id/itemhistory_delete"/>-->
+
+	<RelativeLayout
+		android:layout_height="match_parent"
+		android:layout_width="match_parent">
+
+		<ImageView
+			android:layout_height="40dp"
+			android:layout_width="40dp"
+			android:scaleType="centerInside"
+			android:src="@drawable/ic_star_rate_black_48dp"
+			android:id="@+id/itemhistoryImageView2"
+			android:layout_marginRight="5dp"
+			android:layout_marginBottom="5dp"
+			android:layout_alignParentTop="true"
+			android:layout_marginTop="5dp"
+			android:layout_alignParentRight="true"/>
+
+	</RelativeLayout>
 
 </android.support.v7.widget.CardView>
 

@@ -4,6 +4,7 @@ package willow.getsimplerocketsship.lite.view;
 import android.widget.Toast;
 import android.os.Handler;
 import android.content.Context;
+import android.support.v7.widget.*;
 
 public class WiToast
 {

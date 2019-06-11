@@ -1,0 +1,34 @@
+<Data>
+	<Group name="简单火箭">
+		<Engine name="Tiny 21" isp="541"/>
+		<Engine name="Tiny 87" isp="346"/>
+		<Engine name="Blasto 175" isp="346"/>
+		<Engine name="Blasto 425" isp="346"/>
+		<Engine name="SRB Blasto 500" isp="278"/>
+	</Group>
+	<Group name="坎巴拉太空计划">
+		<Engine name="LV-1 “蚂蚁”液体燃料发动机" isp="315"/>
+		<Engine name="48-7S “火花”液体燃料发动机"isp="320"/>
+		<Engine name="LV-909 “猎犬”液体燃料发动机" isp="345"/>
+		<Engine name="LV-T30 “信赖”液体燃料发动机"isp="310"/>
+		<Engine name="LV-T45 “转轮”液体燃料发动机" isp="320"/>
+		<Engine name="S3 KS-25 “矢量”液体燃料发动机" isp="315"/>
+		<Engine name="LV-N “神经元”核子火箭发动机" isp="800"/>
+		<Engine name="RE-L10 “贵宾犬”液体燃料发动机" isp="350"/>
+		<Engine name="RE-I5 “船长”液体燃料发动机" isp="320"/>
+		<Engine name="RE-M3 “主帆”液体燃料发动机" isp="310"/>
+		<Engine name="KR-2L “犀牛”液体燃料发动机" isp="340"/>
+		<Engine name="S3 KS-25x4 “猛犸”液体燃料发动机" isp="315"/>
+		<Engine name="IX-6315 “黎明”电力推进系统" isp="4200"/>
+		<Engine name="RT-5 “跳蚤”固体燃料发动机" isp="165"/>
+		<Engine name="RT-10 “铁锤”固体燃料发动机" isp="195"/>
+		<Engine name="BACC “强击”固体燃料发动机" isp="210"/>
+		<Engine name="SRB-KD25K “反冲”固体燃料发动机" isp="220"/>
+		<Engine name="J-20 “朱诺”基础喷气式引擎" isp="6400"/>
+		<Engine name="J-33 “韦斯理”涡轮风扇引擎" isp="10500"/>
+		<Engine name="J-404 “黑豹”后燃烧室涡扇引擎" isp="9000"/>
+		<Engine name="J-X4 “鞭梢”涡轮冲压引擎" isp="4000"/>
+		<Engine name="J-90 “哥利亚”涡轮风扇引擎" isp="12600"/>
+		<Engine name="CR-7 空天引擎" isp="3200"/>
+	</Group>
+</Data>

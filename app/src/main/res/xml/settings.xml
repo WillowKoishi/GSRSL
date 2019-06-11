@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<PreferenceScreen 
+		android:key="general_setting"
+		android:title="一般设定"> 
+		<CheckBoxPreference 
+			android:key="isSR"
+			android:defaultValue="true"
+			android:summary="若安装了简单火箭，但应用没有检测出来，请关闭此选项" 
+			android:title="检测简单火箭存在"/>
+		<CheckBoxPreference 
+			android:key="start_sr_and_exit"
+			android:title="启动简单火箭后关闭GSRSL"/>
+		<ListPreference android:dialogTitle="最大历史记录" 
+			android:key="history_max"
+			android:title="最大历史记录"/> 
+		</PreferenceScreen>
+	<PreferenceScreen 
+		android:key="open_resource" 
+		android:title="开源" android:persistent="false"> 
+		
+	</PreferenceScreen>
+	</PreferenceScreen>

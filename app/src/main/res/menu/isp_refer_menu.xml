@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/refer_menu_button"
+		app:showAsAction="ifRoom|collapseActionView"
+		android:icon="@drawable/isp_refer"
+        android:title="比冲参考值"/>
+    
+</menu>

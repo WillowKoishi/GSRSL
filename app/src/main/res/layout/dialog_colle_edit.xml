@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:gravity="left|center">
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:layout_marginTop="10dp">
+
+		<RelativeLayout
+			android:layout_height="100dp"
+			android:layout_width="100dp">
+
+			<ImageView
+				android:layout_height="100dp"
+				android:layout_width="100dp"
+				android:src="@drawable/icon"
+				android:id="@+id/dialog_colle_edit_icon"/>
+
+			<TextView
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceMedium"
+				android:layout_width="match_parent"
+				android:text="修改图标"
+				android:background="#77000000"
+				android:gravity="center"
+				android:textColor="#CCFDFDFD"
+				android:layout_alignParentBottom="true"
+				android:id="@+id/dialog_colle_edit_icon_text"/>
+
+		</RelativeLayout>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:layout_marginStart="8dp"
+			android:orientation="vertical">
+
+			<android.support.design.widget.TextInputLayout
+				android:id="@+id/dialog_til"
+				android:layout_height="wrap_content"
+				android:hint="名称"
+				android:layout_width="match_parent">
+
+				<EditText
+					android:layout_height="wrap_content"
+					android:layout_width="match_parent"
+					android:ems="10"
+					android:singleLine="true"
+					android:id="@+id/dialog_colle_edit_name"/>
+
+			</android.support.design.widget.TextInputLayout>
+
+			<android.support.design.widget.TextInputLayout
+				android:id="@+id/dialog_til2"
+				android:layout_height="wrap_content"
+				android:hint="ID"
+				android:layout_width="match_parent">
+
+				<EditText
+					android:layout_height="wrap_content"
+					android:layout_width="match_parent"
+					android:ems="10"
+					android:singleLine="true"
+					android:id="@+id/dialog_colle_edit_id"
+					android:inputType="number"/>
+
+			</android.support.design.widget.TextInputLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<RadioGroup
+		android:layout_marginStart="31dp"
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="vertical"
+		android:id="@+id/dialog_colle_edit_RadioGroup">
+
+		<RadioButton
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="载具"
+			android:id="@+id/dialog_colle_edit_ship"/>
+
+		<RadioButton
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="沙盒"
+			android:id="@+id/dialog_colle_edit_sandbox"/>
+
+	</RadioGroup>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:gravity="right"
+		android:layout_marginTop="10dp">
+
+		<Button
+			style="?android:attr/buttonBarButtonStyle"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="取消"
+			android:id="@+id/dialog_colle_edit_cancle"/>
+
+		<Button
+			style="?android:attr/buttonBarButtonStyle"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="保存"
+			android:id="@+id/dialog_colle_edit_save"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

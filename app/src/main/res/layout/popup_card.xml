@@ -22,19 +22,20 @@
 			android:layout_width="match_parent"
 			android:orientation="vertical">
 
-			<TextView
-				android:layout_height="30dp"
-				android:textAppearance="?android:attr/textAppearanceSmall"
-				android:layout_width="match_parent"
-				android:text="Small Text"
-				android:id="@+id/popupcardTextView1"
-				android:gravity="center"/>
-
+			
 			<ListView
 				android:layout_height="wrap_content"
 				android:layout_width="match_parent"
 				android:divider="@null"
-				android:id="@+id/popup_list"/>
+				android:id="@+id/popup_list"
+				android:visibility="gone"/>
+
+			<android.support.design.widget.NavigationView
+				android:id="@+id/id_popup_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				app:headerLayout="@layout/head_history"
+				app:menu="@menu/history_menu"/>
 
 			<View
 				android:layout_height="4dp"

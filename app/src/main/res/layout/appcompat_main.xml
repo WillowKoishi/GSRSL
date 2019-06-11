@@ -33,7 +33,7 @@
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
 					android:fitsSystemWindows="false"
-					app:contentScrim="@color/colorPrimary"
+					app:contentScrim="?colorPrimary"
 					app:expandedTitleMarginStart="48dp"
 					android:title="@string/app_name"
 					android:textColor="#00000000"
@@ -70,7 +70,7 @@
 								android:singleLine="true"
 								android:id="@+id/main_getship_edit"
 								android:gravity="center"
-								android:inputType="numberDecimal"
+								android:inputType="number"
 								android:ems="10"
 								android:textColorHint="#FFFFFF"
 								android:textColor="#FFFFFF"/>

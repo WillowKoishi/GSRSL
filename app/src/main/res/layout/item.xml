@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CardView
+<LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_height="150dp"
 	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:id="@+id/item_card"
+	android:orientation="vertical"
+	android:gravity="center"
 	android:clickable="true"
-	android:layout_marginEnd="8dp"
-	android:layout_marginTop="4dp"
-	android:layout_marginBottom="4dp"
-	android:layout_marginStart="4dp">
+	android:id="@+id/itemLinearLayout1">
 
-</CardView>
+	<ImageView
+		android:layout_width="match_parent"
+		android:src="@drawable/icon"
+		android:layout_marginStart="4dp"
+		android:layout_marginEnd="4dp"
+		android:layout_height="wrap_content"
+		android:id="@+id/item_colles_icon"
+		android:layout_weight="1.0"/>
+
+	<TextView
+		android:layout_height="wrap_content"
+		android:layout_marginTop="4dp"
+		android:layout_marginBottom="4dp"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_width="wrap_content"
+		android:text="GSRSL"
+		android:id="@+id/item_icon_name"/>
+
+</LinearLayout>
 

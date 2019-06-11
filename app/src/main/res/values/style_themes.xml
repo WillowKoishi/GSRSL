@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources> 
+	<style name="theme_default" parent="">
+		<item name="color_bkg_main">#f1f1f1</item> 
+		<item name="color_action_bar">#ee9c18</item>
+		<item name="color_action_bar_text">#fff</item> 
+		<item name="color_primary">#ee9c18</item> 
+		<item name="color_primary_pressed">#80ee9c18</item>
+		<item name="color_primary_disabled">#666</item> 
+		<item name="color_text">#202020</item> 
+		<item name="color_text_pressed">#80202020</item>
+		<item name="color_text_disabled">#666</item>
+		<item name="color_text_sub">#717171</item> 
+		<item name="color_text_hint">#b6b6b6</item> 
+		<item name="color_divider">#e2e2e2</item>
+		<item name="colorPrimary">#0090FF</item>
+		<item name="colorPrimaryDark">#0097A7</item>
+		<item name="colorAccent">#0088D1</item>
+		<item name="textColorPrimary">#FFFFFF</item>
+	</style> <style name="theme_sky" parent="theme_default"> 
+		<item name="color_action_bar">#02a8f3</item> 
+		<item name="color_primary">#02a8f3</item> 
+		<item name="color_primary_pressed">#8002a8f3</item>
+		<item name="colorPrimary">#0090FF</item>
+		<item name="colorPrimaryDark">#006BBE</item>
+		<item name="colorAccent">#0088D1</item>
+	</style>
+	<style name="theme_grass" parent="theme_default"> 
+		<item name="color_action_bar">#63d64a</item> 
+		<item name="color_primary">#00AD53</item>
+		<item name="color_primary_pressed">#8063d64a</item>
+		<item name="color_divider">#e2e2e2</item>
+		<item name="colorPrimary">#00AD53</item>
+		<item name="colorPrimaryDark">#008A38</item>
+		<item name="colorAccent">#25B825</item>
+	</style> </resources>

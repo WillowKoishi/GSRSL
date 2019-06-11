@@ -4,13 +4,11 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	
 	tools:context="willow.getsimplerocketsship.lite.appcompat.AppCompatSetting"
 	android:id="@+id/setcoordinatorLayout1">
 
 	<android.support.design.widget.AppBarLayout
 		android:layout_width="match_parent"
-		
 		android:layout_height="wrap_content"
 		android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 	</android.support.design.widget.AppBarLayout>
@@ -19,4 +17,8 @@
 		
 	/>
 
+	<FrameLayout
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:id="@+id/settingFrameLayout1"/>
 </android.support.design.widget.CoordinatorLayout>

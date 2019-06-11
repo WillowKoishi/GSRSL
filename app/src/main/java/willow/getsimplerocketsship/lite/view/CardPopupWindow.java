@@ -14,14 +14,16 @@ import android.graphics.drawable.ColorDrawable;
 import android.widget.TextView;
 import android.widget.*;
 import android.widget.AdapterView.*;
+import android.support.design.widget.*;
 
 public class CardPopupWindow extends PopupWindow
 {LinearLayout parent;
 	private View mMenuView;
 	private TextView infoText;
 	private CardView cardView;
+	private NavigationView nv;
 	private ListView popupList;
-	public CardPopupWindow(Context context,OnItemClickListener itemListener,String info){
+	public CardPopupWindow(Context context,NavigationView.OnNavigationItemSelectedListener nvl,String info){
 		super(context);
 		LayoutInflater inflater = (LayoutInflater) context  
 			.getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
@@ -33,7 +35,9 @@ public class CardPopupWindow extends PopupWindow
 		String[] a=new String[]{"开始游戏","收藏","分享","删除","取消"};
 		popupList.setAdapter(
 		new ArrayAdapter<String>(context.getApplicationContext(), android.R.layout.simple_list_item_1,a));
-		popupList.setOnItemClickListener(itemListener);
+		nv=(NavigationView) mMenuView.findViewById(R.id.id_popup_card);
+		nv.setNavigationItemSelectedListener(nvl);
+	//	popupList.setOnItemClickListener(itemListener);
 		//设置SelectPicPopupWindow的View  
         this.setContentView(mMenuView);  
         //设置SelectPicPopupWindow弹出窗体的宽  

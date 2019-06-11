@@ -1,0 +1,34 @@
+<Data>
+	<Group name="SimpleRockets">
+		<Engine name="Tiny 21" isp="541"/>
+		<Engine name="Tiny 87" isp="346"/>
+		<Engine name="Blasto 175" isp="346"/>
+		<Engine name="Blasto 425" isp="346"/>
+		<Engine name="SRB Blasto 500" isp="278"/>
+	</Group>
+	<Group name="Kerbal Space Program">
+		<Engine name="LV-1 “Ant”" isp="315"/>
+		<Engine name="48-7S “Spark”"isp="320"/>
+		<Engine name="LV-909 “Terrier”" isp="345"/>
+		<Engine name="LV-T30 “Reliant”"isp="310"/>
+		<Engine name="LV-T45 “Switel”" isp="320"/>
+		<Engine name="S3 KS-25 “Vector”" isp="315"/>
+		<Engine name="LV-N “Nerv”" isp="800"/>
+		<Engine name="RE-L10 “Poodle”" isp="350"/>
+		<Engine name="RE-I5 “Skipper”" isp="320"/>
+		<Engine name="RE-M3 “Mainsail”" isp="310"/>
+		<Engine name="KR-2L “Rhino”" isp="340"/>
+		<Engine name="S3 KS-25x4 “Mammoth”" isp="315"/>
+		<Engine name="IX-6315 “Dawn”" isp="4200"/>
+		<Engine name="RT-5 “Flea”" isp="165"/>
+		<Engine name="RT-10 “Hammer”" isp="195"/>
+		<Engine name="BACC “Thumper”" isp="210"/>
+		<Engine name="S1 SRB-KD25K “Kickback”" isp="220"/>
+		<Engine name="J-20 “Juno”Basic Jet Engine" isp="6400"/>
+		<Engine name="J-33 “Wheesley”Turbofan Engine" isp="10500"/>
+		<Engine name="J-404 “Panther”Afterburning Turbofan" isp="9000"/>
+		<Engine name="J-X4 “Whiplash”Turbo Ramjet Engine" isp="4000"/>
+		<Engine name="J-90 “Goliath”Turbofan Engine" isp="12600"/>
+		<Engine name="CR-7 R.A.P.I.E.R Engine" isp="3200"/>
+	</Group>
+</Data>

@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <item
+        android:id="@+id/item_refer_add"
+        android:title="添加"
+		android:icon="@drawable/ic_l_add_dark"
+		app:showAsAction="always"/>
+	<item
+        android:id="@+id/item_refer_dele"
+        android:title="管理"
+		android:icon="@drawable/ic_l_manage_dark"
+		app:showAsAction="always"/>
+</menu>
